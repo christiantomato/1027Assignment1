@@ -147,6 +147,8 @@ public class PeriodicTable {
 
     //toString
     public String toString() {
+
+
         String str = "";
 
         //loop through main table
@@ -206,9 +208,124 @@ public class PeriodicTable {
         return str;
     }
 
-    public static void main(String[] args) {
-        PeriodicTable mine = new PeriodicTable("elements.txt");
-        System.out.println(mine);
+    //getters
 
+    //get element based on symbol
+    public Element getElement(String sym) {
+        //search each array to find find element
+
+        //loop through main
+        for(int i = 0; i < 7; i++) {
+            for(int j = 0; j < 18; j++) {
+                if(this.mainTable[i][j].getSymbol() == sym) {
+                    return this.mainTable[i][j];
+                }
+            }
+        }
+        //loop through lanthanides and actinides
+        for(int i = 0; i < 15; i++) {
+            if(lanthanides[i].getSymbol() == sym) {
+                return this.lanthanides[i];
+            }
+            else if(actinides[i].getSymbol() == sym) {
+                return this.actinides[i];
+            }
+        }
+        //if we reached this point return null
+        return null;
+    }
+
+    //get an array of all elements in a period
+    public Element[] getPeriod(int per) {
+        //check if valid
+        if(per < 1|| per > 7) {
+            return null;
+        }
+
+        int periodIndex = per-1;
+
+        //first loop counts elements, second one puts into array. 
+        int countElements = 0;
+        for(int i = 0; i < 18; i++) {
+            //if not empty count
+            if(this.mainTable[periodIndex][i] != null) {
+                countElements++;
+            }
+        }
+
+        //for lanthanides and actinides we need to add the extra
+        if(per == 6 || per == 7) {
+            //add 15 more spots
+            countElements += 15;
+        }
+
+        //now we can initialize capacity
+        Element[] periodElements = new Element[countElements];
+
+        //loop through again and this time add the elements
+        for(int i = 0, j = 0; i < 18; i++) {
+            //alternate algorithm for lanthanides and actinides
+            if(this.mainTable[periodIndex][i] == null && per > 5) {
+                System.out.println("here");
+                //means we are in the gap
+                for(int k = 0; k < 15; k++) {
+                    if(per == 6) {
+                        //lanthanides
+                        periodElements[j] = this.lanthanides[k];
+                        j++;
+                    }
+                    else if(per == 7) {
+                        //actinides
+                        periodElements[j] = this.actinides[k];
+                        j++;
+                    }
+                }
+            }
+            //default algorithm
+            else if(this.mainTable[periodIndex][i] != null) {
+                //add the elements to the array we will return
+                periodElements[j] = this.mainTable[periodIndex][i];
+                j++;
+            }
+        }
+        //all done, return
+        return periodElements;
+    }
+
+    //get an array of all elements in a group
+    public Element[] getGroup(int grp) {
+        //check if valid
+        if(grp < 1 || grp > 18) {
+            return null;
+        }
+
+        int groupIndex = grp-1;
+
+        //loop through main table only (lanthanides and actinides do not have group)
+        int countElements = 0;
+        for(int i = 0; i < 7; i++) {
+            if(this.mainTable[i][groupIndex] != null) {
+                countElements++;
+            }
+        }
+
+        //init array and put into it
+        Element[] groupElements = new Element[countElements];
+
+        for(int i = 0, j = 0; i < 7; i++) {
+            if(this.mainTable[i][groupIndex] != null) {
+                groupElements[j] = this.mainTable[i][groupIndex];
+                j++;
+            }
+        }
+        return groupElements;
+    }
+
+    public Element[] getLanthanides() {
+        return this.lanthanides;
+    }
+
+    public Element[] getActinides() {
+        return this.actinides;
     }
 }   
