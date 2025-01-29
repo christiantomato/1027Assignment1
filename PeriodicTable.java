@@ -217,17 +217,21 @@ public class PeriodicTable {
         //loop through main
         for(int i = 0; i < 7; i++) {
             for(int j = 0; j < 18; j++) {
-                if(this.mainTable[i][j].getSymbol() == sym) {
+                //make sure not to check when in a null spots
+                if(this.mainTable[i][j] == null) {
+                    continue;
+                }
+                if(this.mainTable[i][j].getSymbol().equals(sym)) {
                     return this.mainTable[i][j];
                 }
             }
         }
         //loop through lanthanides and actinides
         for(int i = 0; i < 15; i++) {
-            if(lanthanides[i].getSymbol() == sym) {
+            if(lanthanides[i].getSymbol().equals(sym)) {
                 return this.lanthanides[i];
             }
-            else if(actinides[i].getSymbol() == sym) {
+            else if(actinides[i].getSymbol().equals(sym)) {
                 return this.actinides[i];
             }
         }
@@ -327,5 +331,11 @@ public class PeriodicTable {
 
     public Element[] getActinides() {
         return this.actinides;
+    }
+
+    public static void main(String[] args) {
+        PeriodicTable table = new PeriodicTable("elements.txt");
+        System.out.println(table);
+        System.out.println(table.getElement("O"));
     }
 }   
