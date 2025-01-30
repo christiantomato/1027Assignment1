@@ -34,13 +34,54 @@ public class Compound {
         }
     }
 
-    public static void main(String[] args) {
-        PeriodicTable table = new PeriodicTable("elements.txt");
-        String[][] compounds = {{"H", "2"}, {"O", "1"}};
-        Compound mine = new Compound(table, compounds);
-        System.out.println(mine.elements[0]);
-        System.out.println(mine.elementCount[0]);
-        System.out.println(mine.elements[1]);
-        System.out.println(mine.elementCount[1]);
+    //get bond type
+    public String getBondType() {
+        //are there 2 elements in the compound
+        if(this.elements.length == 2) {
+            //determine bond
+            String type1 = this.elements[0].getType();
+            String type2 = this.elements[1].getType();
+
+            if((type1.equals("Metal") && type2.equals("Nonmetal")) || (type1.equals("Nonmetal") && type2.equals("Metal"))) {
+                //ionic
+                return "ionic";
+            }
+            else if((type1.equals("Metal") && type2.equals("Metalloid")) || (type1.equals("Metalloid") && type2.equals("Metal"))) {
+                //covalent
+                return "covalent";
+            }
+            else if(type1.equals("Nonmetal") && type2.equals("Nonmetal")) {
+                //covalent
+                return "covalent";
+            }
+            else{
+                //null
+                return null;
+            }
+        }
+        else{
+            return null;
+        }
     }
+
+    //toString
+    public String toString() {
+        String s = "";
+        for(int i = 0; i < this.elements.length; i++) {
+            s += this.elements[i].getName() + ": " + this.elementCount[i] + "\n";
+        }
+
+        return s;
+    }
+
+    
+     public static void main(String[] args) {
+        PeriodicTable table = new PeriodicTable("elements.txt");
+        String[][] compounds = {{"Mg", "1"}, {"Cl", "5"}};
+        Compound mine = new Compound(table, compounds);
+        System.out.println(mine);
+        System.out.println(mine.getBondType());
+    }
+     
+    
 }

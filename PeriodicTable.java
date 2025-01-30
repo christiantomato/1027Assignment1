@@ -36,11 +36,26 @@ public class PeriodicTable {
             //determine type
             int typeIndex = 0;
 
-            for(int i = 13; i < 16; i++) {
+            for(int i = 12; i < 15; i++) {
                 if(splitLine[i].equals("yes")) {
                     //record index
                     typeIndex = i;
                 }
+            }
+
+            //determine type
+            String type = "";
+            if(typeIndex == 12) {
+                //metal
+                type += "Metal";
+            }
+            else if(typeIndex == 13) {
+                //nonmetal
+                type += "Nonmetal";
+            }
+            else if(typeIndex == 14) {
+                //metalloid
+                type += "Metalloid";
             }
 
             //create the element (but skip header)
@@ -48,7 +63,7 @@ public class PeriodicTable {
                 skipHeader = false;
                 continue;
             }
-            Element currentElement = new Element(Integer.parseInt(splitLine[0]), Float.parseFloat(splitLine[3]), splitLine[2], splitLine[1], splitLine[10], splitLine[typeIndex]);
+            Element currentElement = new Element(Integer.parseInt(splitLine[0]), Float.parseFloat(splitLine[3]), splitLine[2], splitLine[1], splitLine[10], type);
 
             //add it to our array
             allElements[currentElement.getAtomicNo()-1] = currentElement;
@@ -333,9 +348,12 @@ public class PeriodicTable {
         return this.actinides;
     }
 
-    public static void main(String[] args) {
+    /*
+     public static void main(String[] args) {
         PeriodicTable table = new PeriodicTable("elements.txt");
-        System.out.println(table);
-        System.out.println(table.getElement("O"));
+        //System.out.println(table);
+        System.out.println(table.getElement("Si").getType());
     }
+     */
+    
 }   
