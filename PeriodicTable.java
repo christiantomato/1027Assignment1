@@ -1,3 +1,11 @@
+/*
+CS 1027B – Assignment 1
+Name: Christian Tamayo
+Student Number: 251 433 749
+Email: ctamayo@uwo.ca
+Created: Jan 26, 2025
+*/
+
 public class PeriodicTable {
     //instance variables
     private Element[][] mainTable;
@@ -340,20 +348,13 @@ public class PeriodicTable {
         return groupElements;
     }
 
+    //get lanthanides
     public Element[] getLanthanides() {
         return this.lanthanides;
     }
 
+    //get actinides
     public Element[] getActinides() {
         return this.actinides;
     }
-
-    /*
-     public static void main(String[] args) {
-        PeriodicTable table = new PeriodicTable("elements.txt");
-        //System.out.println(table);
-        System.out.println(table.getElement("Si").getType());
-    }
-     */
-    
 }   

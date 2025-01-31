@@ -1,3 +1,11 @@
+/*
+CS 1027B – Assignment 1
+Name: Christian Tamayo
+Student Number: 251 433 749
+Email: ctamayo@uwo.ca
+Created: Jan 27, 2025
+*/
+
 public class Compound {
     //instance variables
     Element[] elements;
@@ -72,16 +80,5 @@ public class Compound {
         }
 
         return s;
-    }
-
-    
-     public static void main(String[] args) {
-        PeriodicTable table = new PeriodicTable("elements.txt");
-        String[][] compounds = {{"Mg", "1"}, {"Cl", "5"}};
-        Compound mine = new Compound(table, compounds);
-        System.out.println(mine);
-        System.out.println(mine.getBondType());
-    }
-     
-    
+    }     
 }

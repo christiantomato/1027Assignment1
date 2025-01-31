@@ -1,3 +1,11 @@
+/*
+CS 1027B – Assignment 1
+Name: Christian Tamayo
+Student Number: 251 433 749
+Email: ctamayo@uwo.ca
+Created: Jan 25, 2025
+*/
+
 public class Element {
     //instance variables
     private int atomicNo;
@@ -66,8 +74,4 @@ public class Element {
     public boolean equals(Element other) {
         return (this.atomicNo == other.atomicNo);
     }
-
-
-
-
 }
